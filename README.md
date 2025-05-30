@@ -30,8 +30,8 @@ Algumas estratégias foram desenvolvidas por mim, enquanto outras foram adaptada
 - **Aceleração do MACD**
 - **Faixa de Alta Volatilidade com ATR**
 - **VWAP Bands**
-- **Detector de Doji Libélula
-- **Detecotr de Estrela Cadente
+- **Detector de Doji Libélula**
+- **Detecotr de Estrela Cadente**
 - **Detector de Martelo**
 - **Variação Percentual dos Candles**
 
