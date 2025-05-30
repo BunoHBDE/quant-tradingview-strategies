@@ -5,7 +5,6 @@ Este repositório contém estratégias e indicadores que desenvolvi ao longo da 
 ---
 
 ## 📊 1. Estratégias de Tendência
-- **EMA 200 + MACD + RSI**
 - **Cruzamento EMA 100/200 com ADX**
 - **Tendência com ATR + STC + MA + Fractal (e variantes)**
 - **Swing com EMA e TP 2:1**
@@ -14,8 +13,7 @@ Este repositório contém estratégias e indicadores que desenvolvi ao longo da 
 ---
 
 ## 🔁 2. Estratégias de Reversão
-- **ATR Mean Reversion**
-- **Reversão à Média RSI + BB + Candle (30m)**
+- **EMA 200 + MACD + RSI**
 
 ---
 
@@ -27,11 +25,12 @@ Este repositório contém estratégias e indicadores que desenvolvi ao longo da 
 ---
 
 ## 🔄 4. Indicadores Técnicos
-- **MACD Clássico e 70/210**
 - **Aceleração do MACD**
 - **Faixa de Alta Volatilidade com ATR**
 - **VWAP Bands**
-- **Detector de Doji Libélula / Estrela Cadente / Martelo**
+- **Detector de Doji Libélula
+- **Detecotr de Estrela Cadente
+- **Detector de Martelo**
 - **Variação Percentual dos Candles**
 
 ---
