@@ -5,11 +5,12 @@ Este repositório contém estratégias e indicadores que desenvolvi ao longo da 
 ---
 
 ## 📊 1. Estratégias de Tendência
-- **255 EMA Strategy [v6]**
+- **EMA 200 + MACD + RSI**
 - **Cruzamento EMA 100/200 com ADX**
 - **Tendência com ATR + STC + MA + Fractal (e variantes)**
 - **Swing com EMA e TP 2:1**
-
+- **EMA + ATR SLTP**
+  
 ---
 
 ## 🔁 2. Estratégias de Reversão
@@ -19,10 +20,9 @@ Este repositório contém estratégias e indicadores que desenvolvi ao longo da 
 ---
 
 ## 💥 3. Estratégias de Rompimento e Breakout
-- **Breakout da Máxima 20 com Fechamento na Mínima 20**
-- **EMA Breakout + Volume Squeeze**
-- **Trend + Squeeze Breakout BTC – $100 PL**
-- **Inside Bar Strategy – R/R 2:1**
+- **Richard Dennis Strategy**
+- **Trend + Squeeze Breakout**
+- **Breakout com Tendência + ATR + TP/SL + Timeout**
 
 ---
 
