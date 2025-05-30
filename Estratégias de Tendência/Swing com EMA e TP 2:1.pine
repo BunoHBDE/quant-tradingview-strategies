@@ -1,0 +1,64 @@
+//@version=5
+strategy("Swing com EMA e TP 2:1", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=10)
+
+left = input.int(5, minval=1, title="Candles à esquerda")
+right = input.int(5, minval=1, title="Candles à direita")
+
+// === Médias móveis exponenciais
+shortEMA = ta.ema(close, 20)
+longEMA  = ta.ema(close, 50)
+
+plot(shortEMA, title="EMA 20", color=color.green)
+plot(longEMA, title="EMA 50", color=color.red)
+
+// === Tendência com base nas EMAs
+trendUp = shortEMA > longEMA
+trendDown = shortEMA < longEMA
+
+// === SWING HIGH / LOW
+isSwingHigh = true
+for i = 1 to left
+    isSwingHigh := isSwingHigh and high[right] > high[right + i]
+for i = 1 to right - 1
+    isSwingHigh := isSwingHigh and high[right] > high[right - i]
+
+isSwingLow = true
+for i = 1 to left
+    isSwingLow := isSwingLow and low[right] < low[right + i]
+for i = 1 to right - 1
+    isSwingLow := isSwingLow and low[right] < low[right - i]
+
+// === Alternância entre swings
+var int lastSwingDir = 0
+swingHigh = isSwingHigh and lastSwingDir != 1
+swingLow  = isSwingLow  and lastSwingDir != -1
+
+if swingHigh
+    lastSwingDir := 1
+if swingLow
+    lastSwingDir := -1
+
+// === Condições de entrada com filtro de tendência
+longCondition  = swingLow and strategy.position_size <= 0 and trendUp
+shortCondition = swingHigh and strategy.position_size >= 0 and trendDown
+
+// === Entradas e saídas com TP = 2x SL
+rr = 2.0  // relação risco-retorno
+
+if longCondition
+    sl = low[right]
+    sl_dist = close - sl
+    tp = close + (sl_dist * rr)
+    strategy.entry("Long", strategy.long, comment="🟢 Swing Low", when=bar_index > right)
+    strategy.exit("TP/SL Long", from_entry="Long", stop=sl, limit=tp)
+
+if shortCondition
+    sl = high[right]
+    sl_dist = sl - close
+    tp = close - (sl_dist * rr)
+    strategy.entry("Short", strategy.short, comment="🔴 Swing High", when=bar_index > right)
+    strategy.exit("TP/SL Short", from_entry="Short", stop=sl, limit=tp)
+
+// === Plots visuais dos swings
+plotshape(swingHigh ? high[right] : na, title="Swing High", location=location.abovebar, color=color.red, style=shape.triangledown, offset=-right)
+plotshape(swingLow ? low[right] : na, title="Swing Low", location=location.belowbar, color=color.green, style=shape.triangleup, offset=-right)
