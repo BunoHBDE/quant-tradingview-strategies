@@ -1,6 +1,8 @@
-# Estratégias de TradingView em Pine Script
+# Estratégias e Indicadores compatíveis com TradingView em Pine Script
 
-Este repositório contém estratégias e indicadores que desenvolvi ao longo da minha trajetória prática no mercado de criptoativos e futuros, utilizando a linguagem Pine Script (v6) na plataforma TradingView.
+Este repositório contém estratégias e indicadores que desenvolvi ao longo da minha trajetória prática no mercado de criptoativos e futuros, utilizando a linguagem Pine Script na plataforma TradingView.
+
+Algumas estratégias foram desenvolvidas por mim, enquanto outras foram adaptadas ou transcritas com o objetivo de estudar sua lógica e aplicabilidade prática. Este repositório reflete meu processo de aprendizado em análise técnica e meu interesse por trading quantitativo.
 
 ---
 
@@ -32,11 +34,4 @@ Este repositório contém estratégias e indicadores que desenvolvi ao longo da 
 - **Detecotr de Estrela Cadente
 - **Detector de Martelo**
 - **Variação Percentual dos Candles**
-
----
-
-## 🎯 Objetivo
-
-Algumas estratégias foram desenvolvidas por mim, enquanto outras foram adaptadas ou transcritas com o objetivo de estudar sua lógica e aplicabilidade prática. Este repositório reflete meu processo de aprendizado em análise técnica programável e meu interesse por trading quantitativo.
-
 
