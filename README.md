@@ -39,9 +39,4 @@ Este repositório contém estratégias e indicadores que desenvolvi ao longo da 
 
 Algumas estratégias foram desenvolvidas por mim, enquanto outras foram adaptadas ou transcritas com o objetivo de estudar sua lógica e aplicabilidade prática. Este repositório reflete meu processo de aprendizado em análise técnica programável e meu interesse por trading quantitativo.
 
----
-
-## 👨‍💻 Sobre mim
-
-Sou estudante de Engenharia de Produção com forte afinidade por mercados financeiros, especialmente o quantitativo. Este repositório é parte do meu processo de construção de portfólio técnico para atuação profissional.
 
