@@ -15,7 +15,6 @@ Este repositório contém estratégias e indicadores que desenvolvi ao longo da 
 ## 🔁 2. Estratégias de Reversão
 - **ATR Mean Reversion**
 - **Reversão à Média RSI + BB + Candle (30m)**
-- **Detector de Doji Libélula / Estrela Cadente / Martelo**
 
 ---
 
@@ -27,33 +26,19 @@ Este repositório contém estratégias e indicadores que desenvolvi ao longo da 
 
 ---
 
-## 🔄 4. Estratégias Baseadas em Indicadores Técnicos
-- **MACD + RSI + Mínima 20**
+## 🔄 4. Indicadores Técnicos
 - **MACD Clássico e 70/210**
 - **Aceleração do MACD**
 - **Faixa de Alta Volatilidade com ATR**
 - **VWAP Bands**
-
----
-
-## 🛠️ 5. Ferramentas e Utilidades
-- **Simulação de Regressão com EMA**
-- **Square Wave Boxes**
+- **Detector de Doji Libélula / Estrela Cadente / Martelo**
 - **Variação Percentual dos Candles**
 
 ---
 
 ## 🎯 Objetivo
 
-Todas as estratégias foram desenvolvidas e testadas por mim como parte de um processo contínuo de aprendizado sobre análise técnica programável e sua aplicação quantitativa real. Este portfólio também está alinhado com minha atuação no mercado e ambições profissionais na área quantitativa.
-
----
-
-## 📎 Observações
-
-Cada script está documentado com:
-- Comentários explicativos no código.
-- Racional técnico por trás da estratégia.
+Algumas estratégias foram desenvolvidas por mim, enquanto outras foram adaptadas ou transcritas com o objetivo de estudar sua lógica e aplicabilidade prática. Este repositório reflete meu processo de aprendizado em análise técnica programável e meu interesse por trading quantitativo.
 
 ---
 
