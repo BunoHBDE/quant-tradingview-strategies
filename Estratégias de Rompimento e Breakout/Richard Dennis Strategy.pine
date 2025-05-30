@@ -1,0 +1,40 @@
+//@version=6
+strategy("Estratégia Máxima/Mínima 20 Candles", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=10)
+
+// Número de períodos
+periodo = 20
+
+// Cálculo da máxima e mínima dos últimos 20 candles
+maxima20 = ta.highest(high, periodo)
+minima20 = ta.lowest(low, periodo)
+
+// Plotando as linhas no gráfico
+plot(maxima20, title="Máxima 20", linewidth=2, color=color.green)
+plot(minima20, title="Mínima 20", linewidth=2, color=color.red)
+
+// Variáveis de controle
+var float stopLoss = na
+var float entryPrice = na
+
+// Condição de entrada: fechamento rompe máxima dos últimos 20 candles
+entradaLong = high > maxima20[1] and strategy.position_size == 0
+
+// Abrir posição
+if entradaLong
+    strategy.entry("Compra", strategy.long)
+    entryPrice := close
+    stopLoss := low  // Stop baseado na mínima do candle de entrada
+
+// Condição de stop: rompe a mínima do candle de entrada
+condStop = not na(stopLoss) and close < stopLoss and strategy.position_size > 0
+if condStop
+    strategy.close("Compra", comment="Stop Loss")
+    stopLoss := na
+    entryPrice := na
+
+// Condição de saída: renovar a mínima dos últimos 20 candles
+condSaida = close < minima20[1] and strategy.position_size > 0
+if condSaida
+    strategy.close("Compra", comment="Saída pela mínima 20")
+    stopLoss := na
+    entryPrice := na
