@@ -1,0 +1,19 @@
+//@version=6
+indicator("Detector de Doji Libélula", overlay=true)
+
+// Corpo e sombras
+body = math.abs(close - open)
+upperShadow = high - math.max(close, open)
+lowerShadow = math.min(close, open) - low
+candleRange = high - low
+
+// Condições de Doji Libélula
+isSmallBody = body <= candleRange * 0.05                          // corpo muito pequeno
+isLongLowerShadow = lowerShadow >= candleRange * 0.95            // sombra inferior ≥ 95% do candle
+isNearHighOpen = math.max(open, close) >= high * 0.99            // abertura ou fechamento perto da máxima
+isShortUpperShadow = upperShadow <= candleRange * 0.05           // sombra superior muito curta
+
+isDragonflyDoji = isSmallBody and isLongLowerShadow and isNearHighOpen and isShortUpperShadow
+
+// Sinal visual
+plotshape(isDragonflyDoji, location=location.belowbar, style=shape.labelup, color=color.orange, text="Libélula", textcolor=color.white, size=size.small)
