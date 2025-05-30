@@ -1,0 +1,48 @@
+//@version=6
+strategy("Cruzamento EMA 100/200 com ADX", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=10)
+
+// === Indicadores ===
+ema100 = ta.ema(close, 100)
+ema200 = ta.ema(close, 200)
+plot(ema100, "EMA 100", color.blue)
+plot(ema200, "EMA 200", color.green)
+
+// === ADX ===
+adxlen = input(14, title="ADX Smoothing")
+dilen = input(14, title="DI Length")
+
+// === ADX ===// Função de cálculo do ADX (igual ao indicador oficial)
+dirmov(len) =>
+    up = ta.change(high)
+    down = -ta.change(low)
+    plusDM = na(up) ? na : (up > down and up > 0 ? up : 0)
+    minusDM = na(down) ? na : (down > up and down > 0 ? down : 0)
+    truerange = ta.rma(ta.tr, len)
+    plus = fixnan(100 * ta.rma(plusDM, len) / truerange)
+    minus = fixnan(100 * ta.rma(minusDM, len) / truerange)
+    [plus, minus]
+
+adxCalc(dilen, adxlen) =>
+    [plus, minus] = dirmov(dilen)
+    sum = plus + minus
+	adx = 100 * ta.rma(math.abs(plus - minus) / (sum == 0 ? 1 : sum), adxlen)
+
+sig = adxCalc(dilen, adxlen)
+
+// === Condições ===
+bullishCross = ta.crossover(ema100, ema200)
+bearishCross = ta.crossunder(ema100, ema200)
+adxStrong = sig > 15
+adxWeak = sig < 15
+ 
+// === Entradas ===
+if bullishCross
+    strategy.entry("Long", strategy.long)
+
+if bearishCross
+    strategy.entry("Short", strategy.short)
+
+// === Saída ===
+if adxWeak
+    strategy.close("Long")
+    strategy.close("Short")
