@@ -1,0 +1,21 @@
+//@version=6
+indicator("Detector de Estrela Cadente", overlay=true)
+
+// Corpo e sombras
+body = math.abs(close - open)
+upperShadow = high - math.max(close, open)
+lowerShadow = math.min(close, open) - low
+candleSize = high - low
+
+// Critérios da Estrela Cadente
+minBodySize = candleSize * 0.05
+maxBodySize = candleSize * 0.3
+
+upperShadowRatio = upperShadow / candleSize
+lowerShadowZero = lowerShadow <= candleSize * 0.01  // praticamente zero
+isShootingStar = body >= minBodySize and body <= maxBodySize and upperShadowRatio >= 0.75 and lowerShadowZero
+isShootingStarGold = body >= minBodySize and body <= maxBodySize and upperShadowRatio >= 0.75 and lowerShadowZero and close < open
+
+// Sinal visual
+plotshape(isShootingStar, location=location.abovebar, style=shape.labeldown, color=color.red, text="Estrela", textcolor=color.white, size=size.small)
+plotshape(isShootingStarGold, location=location.abovebar, style=shape.labeldown, color=color.rgb(255, 200, 82), text="Estrela Gold", textcolor=color.white, size=size.small)
