@@ -1,0 +1,20 @@
+//@version=6
+indicator("Variação Percentual dos Candles + Média", overlay=false)
+
+// Parâmetro ajustável para a média
+periodoMedia = input.int(14, minval=1, title="Período da Média")
+
+// Cálculo da variação percentual
+variacao_percentual = (close - close[1]) / close[1] * 100
+
+// Cálculo da média da variação
+media_variacao = ta.sma(variacao_percentual, periodoMedia)
+
+// Plot da variação percentual como colunas
+plot(variacao_percentual, title="Variação %", style=plot.style_columns, color=variacao_percentual >= 0 ? color.green : color.red)
+
+// Linha da média
+plot(media_variacao, title="Média da Variação %", color=color.blue, linewidth=2)
+
+// Linha horizontal no zero
+hline(0, "Zero", color=color.gray, linestyle=hline.style_dotted)
