@@ -1,0 +1,52 @@
+//@version=6
+strategy("EMA + ATR SLTP", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=100)
+
+// ── INPUTS ──
+emaFastLen = input.int(9, "EMA Curta")
+emaSlowLen = input.int(21, "EMA Longa")
+emaTrendLen = input.int(50, "EMA Tendência")
+atrLen = input.int(14, "ATR Período")
+tpMult = input.float(2.5, "Take Profit (x ATR)")
+slMult = input.float(1.0, "Stop Loss (x ATR)")
+cooldownBars = input.int(40, "Cooldown (candles)")
+minBodyPerc = input.float(0.35, "Mínimo % Corpo do Candle")
+
+// ── CÁLCULOS ──
+emaFast = ta.ema(close, emaFastLen)
+emaSlow = ta.ema(close, emaSlowLen)
+emaTrend = ta.ema(close, emaTrendLen)
+atr = ta.atr(atrLen)
+
+candleRange = high - low
+candleBody = math.abs(close - open)
+bodyPerc = candleBody / candleRange
+validBody = bodyPerc > minBodyPerc
+
+// ── SINAIS ──
+bullish = ta.crossover(emaFast, emaSlow) and close > emaTrend and validBody
+bearish = ta.crossunder(emaFast, emaSlow) and close < emaTrend and validBody
+
+// ── COOLDOWN ──
+var int lastTradeBar = na
+canEnter = na(lastTradeBar) or (bar_index - lastTradeBar > cooldownBars)
+
+if bullish and canEnter
+    strategy.entry("Long", strategy.long)
+    lastTradeBar := bar_index
+if bearish and canEnter
+    strategy.entry("Short", strategy.short)
+    lastTradeBar := bar_index
+
+// ── SL/TP ──
+longTP = close + atr * tpMult
+longSL = close - atr * slMult
+shortTP = close - atr * tpMult
+shortSL = close + atr * slMult
+
+strategy.exit("Long Exit", from_entry="Long", limit=longTP, stop=longSL)
+strategy.exit("Short Exit", from_entry="Short", limit=shortTP, stop=shortSL)
+
+// ── VISUAL ──
+plot(emaFast, color=color.green, title="EMA Curta")
+plot(emaSlow, color=color.red, title="EMA Longa")
+plot(emaTrend, color=color.orange, title="EMA Tendência")
